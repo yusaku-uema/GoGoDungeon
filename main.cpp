@@ -44,8 +44,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		PadInput::UpdateKey();
 		sceneMng->Draw();
 
-		
-
 		ScreenFlip();			// 裏画面の内容を表画面に反映
 
 		//フレームレートの設定
@@ -54,6 +52,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		if (dNextTime > GetNowCount())
 		{
 			WaitTimer(static_cast<int>(dNextTime) - GetNowCount());
+			//static_cast<int>　int型に変換（キャスト）
 		}
 		else { dNextTime = GetNowCount(); }		//補正
 	}
