@@ -31,14 +31,11 @@ Title::~Title()
 //-----------------------------------
 AbstractScene* Title::Update()
 {
+	//フェードイン
 	if (fade_counter < FADE_TIME)
 	{
+		//画面をだんだん明るくする。
 		fade_counter++;
-	}
-
-	if (fade_counter < FADE_TIME)
-	{
-		return this;
 	}
 
 	// 操作間隔時間
@@ -84,12 +81,12 @@ AbstractScene* Title::Update()
 		switch (current_selection)
 		{
 		case Title::MENU::PLAY:
-			//return new GameMain(1, element_volume, pouch);
+			return this;
 			break;
 
 		
 		case Title::MENU::EXIT:
-			//return new Credit();
+			return this;
 			break;
 
 		default:
