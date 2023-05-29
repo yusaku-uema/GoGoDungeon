@@ -8,21 +8,24 @@ private:
     enum class MENU
     {
         PLAY,
-        //OPTION,
-        HELP,
         EXIT,
         MENU_SIZE
     };
 
-    const char* menu_items[static_cast<int>(MENU::MENU_SIZE)] = {
+    const char* menu_items[static_cast<int>(MENU::MENU_SIZE)] = 
+    {
         "PLAY",
-        //"OPTION",
-        "HELP",
         "EXIT"
     };
 
     // 選択しているメニュー
     int select_menu;
+
+    //操作間隔時間
+    int input_margin;
+
+    //フェード用カウンタ
+    int fade_counter;
 
 public:
 
