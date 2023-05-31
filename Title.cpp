@@ -4,6 +4,10 @@
 
 #define FADE_TIME 300
 
+#define STATE_Y 300
+
+#define EXIT_Y 400
+
 
 //-----------------------------------
 // コンストラクタ
@@ -16,6 +20,8 @@ Title::Title()
 
 	fade_counter = 0;
 
+	cursor_y = 0;
+
 }
 
 //-----------------------------------
@@ -23,7 +29,7 @@ Title::Title()
 //-----------------------------------
 Title::~Title()
 {
-	
+
 }
 
 //-----------------------------------
@@ -39,21 +45,26 @@ AbstractScene* Title::Update()
 	}
 
 	// 操作間隔時間
-	const int max_input_margin = 15;
+	const int max_input_margin = 10;
 
 	// スティックの感度
 	const int stick_sensitivity = 20000;
 
+	//操作時間、間隔
 	if (input_margin < max_input_margin)
 	{
 		input_margin++;
 	}
-	else {
+	else //操作
+	{
 
 		// スティックのY座標を取得
-		int stick_y = PadInput::GetLStick().y;
+		//int stick_y = PadInput::GetLStick().y;
+		 stick_y = PadInput::GetLStick().y;
 
-		if (stick_y > stick_sensitivity) {
+		 //スティックの受付
+		 if (stick_y > stick_sensitivity || stick_y < stick_sensitivity * -1)
+		{
 
 			// スティックが上に移動した場合
 			if (stick_y > 0) {
@@ -72,6 +83,19 @@ AbstractScene* Title::Update()
 
 	}
 
+	//カーソルの位置
+	switch (select_menu)
+	{
+	case 0:
+		cursor_y = STATE_Y; //スタートのカーソル位置
+		break;
+	case 1:
+		cursor_y = EXIT_Y; //EXITのカーソル位置
+		break;
+	default:
+		break;
+	}
+
 
 	if (PadInput::GetNowKey(XINPUT_BUTTON_A) && (PadInput::OnButton(XINPUT_BUTTON_A) == true))
 	{
@@ -84,7 +108,7 @@ AbstractScene* Title::Update()
 			return this;
 			break;
 
-		
+
 		case Title::MENU::EXIT:
 			return this;
 			break;
@@ -105,34 +129,21 @@ AbstractScene* Title::Update()
 void Title::Draw()const
 {
 	int bright = static_cast<int>((static_cast<float>(fade_counter) / FADE_TIME * 255));
-	SetDrawBright(bright, bright, bright);
 
-	DrawFormatString(300, 100, 0xFFFFFF, "イケイケダンジョン君");
+	SetDrawBright(bright, bright, bright); //画面の明るさ
 
-	for (int i = 0; i < static_cast<int>(MENU::MENU_SIZE); i++)
-	{
-		// 文字列の最小Y座標
-		const int base_y = 400;
+	SetFontSize(40);
 
-		// 文字列のY座標間隔
-		const int margin_y = 100;
+	DrawFormatString(400, 100, 0xFFFFFF, "考え中");
 
-		// 文字色
-		int color = 0xFFFFFF;
-		// 文字外枠色
-		int border_color = 0x000000;
+	DrawFormatString(550, 300, 0xFFFFFF, "START");
 
-		// 透明度
-		int transparency = 180;
+	DrawFormatString(550, 400, 0xFFFFFF, "EXIT");
 
-		// カーソルが合っている場合、文字色と文字外枠色を反転させる
-		if (select_menu == i) {
-			color = ~color;
-			border_color = ~border_color;
-			transparency = 255;
-		}
+	DrawFormatString(100, 100, 0xFFFFFF, "%d", stick_y);
 
-	}
-
+	
+	//カーソル
+	DrawString(500, cursor_y, "■", GetColor(255, 255, 255));
 
 }

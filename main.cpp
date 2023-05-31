@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	double dNextTime = GetNowCount();
 
-	SetMainWindowText("イケイケ!! ダンジョン君");
+	SetMainWindowText("考え中");
 
 	ChangeWindowMode(TRUE);		// ウィンドウモードで起動
 

@@ -11,21 +11,21 @@ private:
         EXIT,
         MENU_SIZE
     };
-
-    const char* menu_items[static_cast<int>(MENU::MENU_SIZE)] = 
-    {
-        "PLAY",
-        "EXIT"
-    };
+ 
 
     // 選択しているメニュー
     int select_menu;
+
+    //カーソルのY座標
+    int cursor_y;
 
     //操作間隔時間
     int input_margin;
 
     //フェード用カウンタ
     int fade_counter;
+
+    int stick_y;
 
 public:
 
