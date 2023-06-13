@@ -1,5 +1,6 @@
 #include "Title.h"
 #include"PadInput.h"
+#include"GameMain.h"
 #include"DxLib.h"
 
 #define FADE_TIME 300
@@ -105,9 +106,8 @@ AbstractScene* Title::Update()
 		switch (current_selection)
 		{
 		case Title::MENU::PLAY:
-			return this;
+			return new GameMain();
 			break;
-
 
 		case Title::MENU::EXIT:
 			return this;
@@ -134,7 +134,7 @@ void Title::Draw()const
 
 	SetFontSize(40);
 
-	DrawFormatString(400, 100, 0xFFFFFF, "考え中");
+	DrawFormatString(400, 100, 0xFFFFFF, "タイトル考え中");
 
 	DrawFormatString(550, 300, 0xFFFFFF, "START");
 

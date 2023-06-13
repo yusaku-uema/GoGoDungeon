@@ -27,67 +27,26 @@ private:
 public:
 
 	//パッド情報の更新
-	static void UpdateKey()
-	{
-		// 入力キー取得
-		GetJoypadXInputState(DX_INPUT_KEY_PAD1, &input);
-
-		for (int i = 0; i < BUTTONS; i++)
-		{
-			old_key[i] = now_key[i];
-			now_key[i] = input.Buttons[i];
-		}
-
-		//右スティック
-		r_stick.x = input.ThumbRX;
-		r_stick.y = input.ThumbRY;
-
-		//左スティック
-		l_stick.x = input.ThumbLX;
-		l_stick.y = input.ThumbLY;
-	}
-
+	static void UpdateKey();
+	
 	//ボタンを押された瞬間
-	static bool OnButton(int button)
-	{
-		bool ret = (now_key[button] == 1 && old_key[button] == 0);
-		return ret;
-	}
-
+	static bool OnButton(int button);
+	
 	//ボタンを押してる間
-	static bool OnPressed(int button)
-	{
-		bool ret = (now_key[button] == 1);
-		return ret;
-	}
+	static bool OnPressed(int button);
 
 	//ボタンを離した瞬間
-	static bool OnRelease(int button)
-	{
-		bool ret = (now_key[button] == 0 && old_key[button] == 1);
-		return ret;
-	}
+	static bool OnRelease(int button);
 
 	//右スティックの取得
-	static Stick GetRStick()
-	{
-		return r_stick;
-	}
+	static Stick GetRStick();
 
 	//左スティックの取得
-	static Stick GetLStick()
-	{
-		return l_stick;
-	}
+	static Stick GetLStick();
 
-	static char GetOldKey(const int i)
-	{
-		return old_key[i];
-	}
+	static char GetOldKey(const int i);
 
-	static char GetNowKey(const int i)
-	{
-		return now_key[i];
-	}
+	static char GetNowKey(const int i);
+	
 };
 
